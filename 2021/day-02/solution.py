@@ -3,7 +3,7 @@
 from typing import List, Tuple
 
 
-def solution_1(directions: List[Tuple]):
+def solution_1(directions: List[Tuple[str, int]]):
     forward, depth = 0, 0
     for item in directions:
         (direction, value) = item
@@ -16,7 +16,7 @@ def solution_1(directions: List[Tuple]):
         
     print(forward*depth)
 
-def solution_2(directions: List[Tuple]):
+def solution_2(directions: List[Tuple[str, int]]):
     forward, depth, aim = 0, 0, 0
     for item in directions:
         (direction, value) = item
