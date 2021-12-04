@@ -6,7 +6,7 @@
             "type": "python",
             "request": "launch",
             "program": "${file}",
-            "cwd": "${relativeFileDirname}",
+            "cwd": "${fileDirname}",
             "console": "integratedTerminal",
             "env": {
                 "PYTHONPATH": "/home/nenad-home/Projects/adventofcode/"
