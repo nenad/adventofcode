@@ -1,6 +1,7 @@
 from typing import List, Tuple
 from santa_helpers.reader import read
 
+
 class Coordinate:
     def __init__(self, x, y) -> None:
         self.x = x
@@ -41,7 +42,8 @@ class Segment:
         elif len(y_range) == 1:
             coords = [Coordinate(x, y_range[0]) for x in x_range]
         else:
-            coords = [Coordinate(x_range[i], y_range[i]) for i in range(0, len(x_range))]
+            coords = [Coordinate(x_range[i], y_range[i])
+                      for i in range(0, len(x_range))]
 
         return coords
 
@@ -91,6 +93,7 @@ def solution(segments: List[Segment]) -> None:
     # print()
 
     print(intersection_count)
+
 
 allSegments = read('input', read_coordinates)
 
