@@ -1,9 +1,6 @@
 from typing import List, Tuple
 from santa_helpers.reader import read
 
-matrixSize = [0, 0]
-
-
 class Coordinate:
     def __init__(self, x, y) -> None:
         self.x = x
@@ -66,32 +63,21 @@ def read_coordinates(line: str) -> Segment:
     )
 
 
-def matrix(segments: List[Segment]):
-    max_x = 0
-    max_y = 0
-    for s in segments:
-        if s.begin.x > max_x:
-            max_x = s.begin.x
-        if s.end.x > max_x:
-            max_x = s.end.x
-        if s.begin.y > max_y:
-            max_y = s.begin.y
-        if s.end.y > max_y:
-            max_y = s.end.y
-
-    return [[0 for _ in range(0, max_y + 1)] for _ in range(0, max_x + 1)]
-
-
 def solution(segments: List[Segment]) -> None:
-    field = matrix(segments)
+    field = {}
 
     required_intersections = 2
     intersection_count = 0
 
     for s in segments:
         for p in s.points():
-            field[p.x][p.y] += 1
-            if field[p.x][p.y] == required_intersections:
+            key = str(p)
+            if key in field:
+                field[key] += 1
+            else:
+                field[key] = 1
+
+            if field[key] == required_intersections:
                 intersection_count += 1
 
     # Debug field
