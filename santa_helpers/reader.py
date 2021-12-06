@@ -1,9 +1,9 @@
-from typing import Any, Callable
+from typing import Any, Callable, List
 
 def return_string(line: str):
     return line
 
-def read(filename: str, op: Callable[[str], Any] = return_string):
+def read(filename: str, op: Callable[[str], Any] = return_string) -> List:
     data = []
     with open(filename) as f:
         while True:
