@@ -12,6 +12,9 @@ def solution(crabPositions: List[int]) -> None:
     for pos in crabPositions:
         crabBuckets[pos] += 1
 
+    # The solution can be optimized by finding the mean value
+    # and starting from there, going left and right to adjust.
+
     # print(crabBuckets)
     crabDistances = [0] * (maxPos + 1)
     crabDistancesIncrement = [0] * (maxPos + 1)
@@ -21,8 +24,8 @@ def solution(crabPositions: List[int]) -> None:
             crabDistances[i] += weight * abs(pos - i)
             crabDistancesIncrement[i] += weight * sum_until(abs(pos - i))
 
-    print("Solution 1:", min(crabDistances))
-    print("Solution 2:", min(crabDistancesIncrement))
+    print("Solution 1:", min(crabDistances), crabDistances.index(min(crabDistances)))
+    print("Solution 2:", min(crabDistancesIncrement), crabDistancesIncrement.index(min(crabDistancesIncrement)))
 
 
 def sum_until(n: int) -> int:
