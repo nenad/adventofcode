@@ -1,6 +1,6 @@
 from typing import Dict, List
 from santa_helpers.reader import read
-import itertools
+from collections import Counter
 
 graph = {}
 start = 'start'
@@ -15,30 +15,26 @@ def solution1() -> None:
 
 
 def solution2() -> None:
-    two_visit_caves = [x for x in list(graph.keys()) if x.islower() and x != end and x != start]
-    all_paths = []
-    for cave in two_visit_caves:
-        visited = []
-        visit(start, visited, all_paths, cave)
-
-    all_paths.sort()
-    all_deduped = list(l for l, _ in itertools.groupby(all_paths))
-
-    print(len(all_deduped))
+    paths = []
+    visited = []
+    visit(start, visited, paths, True)
+    print(len(paths))
 
 
-def visit(dest: str, visited: List[str], all_paths: List[List[str]], double_visit: str = None):
+def visit(dest: str, visited: List[str], all_paths: List[List[str]], double_visit: bool = False):
     visited.append(dest)
     if dest == end:
         all_paths.append(visited)
         return
 
     neighbors = sorted(graph[dest])
-
     for next in neighbors:
-        can_double_visit = True if next == double_visit and visited.count(double_visit) < 2 else False
+        if next == 'start':
+            continue
 
-        if next not in visited or next.isupper() or can_double_visit:
+        small_caves = [x for x in visited if x not in ['start', 'end'] and x.islower()]
+        can_double_visit = double_visit and len(Counter(small_caves)) == len(small_caves)
+        if can_double_visit or next.isupper() or next not in visited:
             visit(next, visited.copy(), all_paths, double_visit)
 
     return all_paths
