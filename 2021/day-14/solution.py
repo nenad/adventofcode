@@ -23,7 +23,6 @@ def solution(template: str, insertion_rules: Dict[str, str], runs: int = 10):
         pair = template[i] + template[i+1]
         pairs[pair] = pairs.get(pair, 0) + 1
 
-    next_pairs = {}
     char_counts = {}
     for char in template:
         char_counts[char] = char_counts.get(char, 0) + 1
